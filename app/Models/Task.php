@@ -15,12 +15,10 @@ class Task extends Model
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'organization_id',
-        'title',
-        'description',
-        'due_date',
-        'max_score',
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'due_date' => 'datetime',
     ];
 
     public function isDueToday()
