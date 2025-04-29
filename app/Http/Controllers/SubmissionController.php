@@ -80,6 +80,12 @@ class SubmissionController extends Controller
         return view('admin.submissions.index', compact('submissions'));
     }
 
+    public function destroy(Submission $submission)
+    {
+        $submission->delete();
+        return redirect()->back()->with('success', 'Submission berhasil dihapus.');
+    }
+
     public function approve(Submission $submission)
     {
         $taskScore = $submission->task->score ?? 10;

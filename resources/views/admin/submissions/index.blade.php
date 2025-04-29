@@ -29,6 +29,7 @@
                   <th class="px-4 py-2 text-left">File</th>
                   <th class="px-4 py-2 text-left">Skor</th>
                   <th class="px-4 py-2 text-left">Status</th>
+                  <th class="px-4 py-2 text-left">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -82,6 +83,14 @@
                       @else
                         <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Approved</span>
                       @endif
+                    </td>
+                    <td class="px-4 py-2">
+                      <form action="{{ route('admin.submissions.destroy', $submission) }}" method="POST"
+                        onsubmit="return confirm('Yakin ingin menghapus submission ini?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:underline text-sm font-semibold">Hapus</button>
+                      </form>
                     </td>
                   </tr>
                 @endforeach
