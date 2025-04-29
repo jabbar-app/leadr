@@ -15,8 +15,6 @@ class DashboardController extends Controller
     {
         $user = User::find(Auth::id());
 
-        $today = now()->toDateString();
-
         // Range 30 hari terakhir
         $dates = collect(range(0, 29))->map(function ($i) {
             return Carbon::today()->subDays(29 - $i)->format('Y-m-d');
@@ -56,29 +54,21 @@ class DashboardController extends Controller
         }
 
         // Ambil tugas hari ini yang belum dikerjakan
-        $tasks = Task::dueToday()
+        $tasks = Task::dueUpcoming()
             ->where('organization_id', $user->organization_id)
-            ->get()
-            ->filter(function ($task) use ($user, $today) {
-                return !$task->submissions()
-                    ->where('user_id', $user->id)
-                    ->whereDate('submitted_at', $today)
-                    ->exists();
-            });
+            ->unsubmittedBy($user->id)
+            ->get();
 
-        // Submissions user
         $submittedTasks = $user->submissions()
             ->pending()
             ->with('task')
             ->get()
-            ->filter(fn($s) => $s->task && $s->task->isDueToday())
             ->pluck('task');
 
         $completedTasks = $user->submissions()
             ->approved()
             ->with('task')
             ->get()
-            ->filter(fn($s) => $s->task && $s->task->isDueToday())
             ->pluck('task');
 
         $totalTasks = $tasks->count() + $submittedTasks->count() + $completedTasks->count();

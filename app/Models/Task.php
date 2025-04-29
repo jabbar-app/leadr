@@ -10,11 +10,6 @@ class Task extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $guarded = ['id'];
 
     protected $casts = [
@@ -84,16 +79,33 @@ class Task extends Model
     }
 
     /**
-     * Relationship: Task belongs to an Organization.
+     * Scope: Ambil semua task yang belum lewat due_date-nya atau yang recurring aktif hari ini ke depan.
      */
+    public function scopeDueUpcoming($query)
+    {
+        return $query->where(function ($q) {
+            $q->where('is_recurring', false)
+                ->whereDate('due_date', '>=', now()->toDateString());
+        })->orWhere(function ($q) {
+            $q->where('is_recurring', true); // recurring dianggap selalu aktif
+        });
+    }
+
+    /**
+     * Scope: Ambil semua task yang belum dikerjakan oleh user tertentu
+     */
+    public function scopeUnsubmittedBy($query, $userId)
+    {
+        return $query->whereDoesntHave('submissions', function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        });
+    }
+
     public function organization()
     {
         return $this->belongsTo(Organization::class);
     }
 
-    /**
-     * Relationship: Task has many Submissions.
-     */
     public function submissions()
     {
         return $this->hasMany(Submission::class);
