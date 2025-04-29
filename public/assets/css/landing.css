@@ -1,0 +1,76 @@
+/* landing.css */
+
+/* Smooth Scroll for Anchor Links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Basic Animation: Fade Up */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+/* Animation Delay Helpers */
+.animate-fade-up.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.animate-fade-up.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.animate-fade-up.delay-3 {
+    animation-delay: 0.6s;
+}
+
+.animate-fade-up.delay-4 {
+    animation-delay: 0.8s;
+}
+
+/* Counter Numbers */
+.counter {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Section Padding */
+section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* CTA Button Hover Effect */
+a:hover {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Improve readability for p and small texts */
+p,
+small {
+    line-height: 1.6;
+}
+
+/* Responsive Image Centering */
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ad block margin */
+.adsbygoogle {
+    margin: 2rem auto;
+}
