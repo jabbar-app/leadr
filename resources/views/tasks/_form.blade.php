@@ -46,7 +46,7 @@
 <div class="mb-4" id="due_date_wrapper">
   <label for="due_date" class="block font-semibold mb-1">Batas Waktu</label>
   <input type="date" name="due_date" id="due_date" class="w-full border rounded px-3 py-2"
-    value="{{ old('due_date', isset($task->due_date) ? $task->due_date->format('Y-m-d') : '') }}">
+    value="{{ old('due_date', isset($task->due_date) ? \Carbon\Carbon::parse($task->due_date)->format('Y-m-d') : '') }}">
 </div>
 
 <!-- Submit -->
