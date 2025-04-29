@@ -28,7 +28,7 @@
                 <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Peringkat</th>
                 <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Nama Peserta</th>
                 <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Skor</th>
-                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Waktu Selesai</th>
+                {{-- <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Waktu Selesai</th> --}}
               </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                   <td class="px-4 py-2">{{ $index + 1 }}</td>
                   <td class="px-4 py-2">{{ $user->name }}</td>
                   <td class="px-4 py-2">{{ $user->total_score }}</td>
-                  <td class="px-4 py-2">{{ \Carbon\Carbon::parse($user->earliest_submission_time)->format('H:i') }}</td>
+                  {{-- <td class="px-4 py-2">{{ \Carbon\Carbon::parse($user->earliest_submission_time)->format('H:i') }}</td> --}}
                 </tr>
               @endforeach
             </tbody>

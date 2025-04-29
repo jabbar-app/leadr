@@ -85,12 +85,11 @@
                       @endif
                     </td>
                     <td class="px-4 py-2">
-                      <form action="{{ route('admin.submissions.destroy', $submission) }}" method="POST"
-                        onsubmit="return confirm('Yakin ingin menghapus submission ini?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-600 hover:underline text-sm font-semibold">Hapus</button>
-                      </form>
+                      <button type="button"
+                        onclick="submitDelete('{{ route('admin.submissions.destroy', $submission) }}')"
+                        class="text-red-600 hover:underline text-sm font-semibold">
+                        Hapus
+                      </button>
                     </td>
                   </tr>
                 @endforeach
@@ -109,6 +108,12 @@
       @endif
     </div>
   </div>
+
+  {{-- Form delete global --}}
+  <form id="delete-form" method="POST" style="display: none;">
+    @csrf
+    @method('DELETE')
+  </form>
 @endsection
 
 @push('scripts')
@@ -117,5 +122,13 @@
       const checkboxes = document.querySelectorAll('input[name="selected_submissions[]"]');
       checkboxes.forEach(cb => cb.checked = this.checked);
     });
+
+    function submitDelete(actionUrl) {
+      if (confirm('Yakin ingin menghapus submission ini?')) {
+        const form = document.getElementById('delete-form');
+        form.action = actionUrl;
+        form.submit();
+      }
+    }
   </script>
 @endpush
