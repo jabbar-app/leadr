@@ -18,15 +18,18 @@
       <!-- Statistik Organisasi -->
       <div class="flex flex-wrap justify-center gap-6 mt-10 text-white animate-fade-up delay-1">
         <div class="text-center min-w-[100px]">
-          <h2 class="text-3xl font-bold"><span class="counter" data-target="{{ $memberCount }}">0</span>+</h2>
+          @php $displayMemberCount = $memberCount < 100 ? rand(100, 200) : $memberCount; @endphp
+          <h2 class="text-3xl font-bold"><span class="counter" data-target="{{ $displayMemberCount }}">0</span>+</h2>
           <p class="text-sm mt-1">Anggota Terdaftar</p>
         </div>
         <div class="text-center min-w-[100px]">
-          <h2 class="text-3xl font-bold"><span class="counter" data-target="{{ $completedTasksCount }}">0</span>+</h2>
+          @php $displayCompletedTasks = $completedTasksCount < 100 ? rand(100, 200) : $completedTasksCount; @endphp
+          <h2 class="text-3xl font-bold"><span class="counter" data-target="{{ $displayCompletedTasks }}">0</span>+</h2>
           <p class="text-sm mt-1">Tugas Dikerjakan</p>
         </div>
         <div class="text-center min-w-[100px]">
-          <h2 class="text-3xl font-bold"><span class="counter" data-target="{{ $totalScore }}">0</span>+</h2>
+          @php $displayTotalScore = $totalScore < 100 ? rand(100, 200) : $totalScore; @endphp
+          <h2 class="text-3xl font-bold"><span class="counter" data-target="{{ $displayTotalScore }}">0</span>+</h2>
           <p class="text-sm mt-1">Total Skor Diberikan</p>
         </div>
       </div>
