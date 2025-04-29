@@ -48,7 +48,7 @@ class TaskController extends Controller
         $task->score = $validated['score'];
         $task->due_date = $validated['due_date'] ?? null;
         $task->is_recurring = $request->boolean('is_recurring');
-        $task->recurring_type = $request->is_recurring ? $validated['recurring_type'] : null;
+        $task->recurring_type = $task->is_recurring ? $validated['recurring_type'] : null;
         $task->save();
 
         return redirect()->route('dashboard')->with('success', 'Tugas berhasil ditambahkan.');
@@ -76,15 +76,23 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $request->validate([
-            'organization_id' => ['required', 'exists:organizations,id'],
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'due_date' => ['nullable', 'date'],
-            'max_score' => ['required', 'integer', 'min:1'],
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'score' => 'required|integer|min:1',
+            'due_date' => 'nullable|date',
+            'is_recurring' => 'nullable|boolean',
+            'recurring_type' => 'nullable|in:daily,weekly,monthly',
         ]);
 
-        $task->update($request->all());
+        $task->update([
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null,
+            'score' => $validated['score'],
+            'due_date' => $validated['due_date'] ?? null,
+            'is_recurring' => $request->boolean('is_recurring'),
+            'recurring_type' => $request->boolean('is_recurring') ? $validated['recurring_type'] : null,
+        ]);
 
         return redirect()->route('tasks.index')->with('success', 'Tugas berhasil diperbarui.');
     }
