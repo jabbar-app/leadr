@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('/submissions', [SubmissionController::class, 'index'])->name('admin.submissions.index');
     Route::post('/submissions/{submission}/approve', [SubmissionController::class, 'approve'])->name('admin.submissions.approve');
     Route::post('/submissions/bulk-approve', [SubmissionController::class, 'bulkApprove'])->name('admin.submissions.bulkApprove');

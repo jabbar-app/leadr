@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use App\Models\Submission;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Submission;
+use App\Models\Organization;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -96,5 +97,17 @@ class DashboardController extends Controller
             'submittedData',
             'completedData'
         ));
+    }
+
+    public function adminDashboard()
+    {
+        return view('admin.dashboard', [
+            'totalUsers' => User::count(),
+            'totalOrganizations' => Organization::count(),
+            'totalTasks' => Task::count(),
+            'totalSubmissions' => Submission::count(),
+            'recentTasks' => Task::latest()->take(5)->get(),
+            'recentSubmissions' => Submission::latest()->with('user', 'task')->take(5)->get(),
+        ]);
     }
 }
