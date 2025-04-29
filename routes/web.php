@@ -10,7 +10,7 @@ use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\OrganizationController;
 
 Route::get('/', [PageController::class, 'landing'])->name('pages.landing');
-Route::get('/org/{organization:username}', [PageController::class, 'organization'])->name('pages.landing');
+Route::get('/org/{organization:username}', [PageController::class, 'organization'])->name('pages.organization');
 Route::get('/{organization:username}/leaderboard', [OrganizationController::class, 'leaderboard'])->name('organizations.leaderboard');
 
 Route::middleware('auth')->group(function () {

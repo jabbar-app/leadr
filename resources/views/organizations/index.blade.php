@@ -33,7 +33,7 @@
               <td class="p-3">{{ $organization->email }}</td>
               <td class="p-3">{{ $organization->phone }}</td>
               <td class="p-3 flex gap-2">
-                <a href="{{ route('organizations.show', $organization) }}" class="text-blue-600 hover:underline">Lihat</a>
+                <a href="{{ route('pages.organizations', $organization) }}" class="text-blue-600 hover:underline">Lihat</a>
                 <a href="{{ route('organizations.edit', $organization) }}"
                   class="text-yellow-500 hover:underline">Edit</a>
                 <form action="{{ route('organizations.destroy', $organization) }}" method="POST"
