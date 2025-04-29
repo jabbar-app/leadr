@@ -20,6 +20,7 @@ class SubmissionController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         try {
             $request->validate([
                 'task_id' => 'required|exists:tasks,id',

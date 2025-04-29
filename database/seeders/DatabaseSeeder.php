@@ -24,18 +24,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Buat dummy Organization
-        // $organizations = Organization::factory(5)->create();
+        $organizations = Organization::factory(5)->create();
 
-        // // Untuk setiap Organization, buat dummy Task
-        // foreach ($organizations as $organization) {
-        //     Task::factory(10)->create([
-        //         'organization_id' => $organization->id,
-        //     ]);
-        // }
+        // Untuk setiap Organization, buat dummy Task
+        foreach ($organizations as $organization) {
+            Task::factory(10)->create([
+                'organization_id' => $organization->id,
+            ]);
+        }
 
-        // // Buat dummy peserta User (role = participant)
-        // User::factory(50)->create([
-        //     'role' => 'participant',
-        // ]);
+        // Buat dummy peserta User (role = participant)
+        User::factory(50)->create([
+            'role' => 'participant',
+        ]);
     }
 }
