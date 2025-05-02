@@ -35,23 +35,15 @@
       <!-- Logo -->
       <a href="{{ url('/') }}" class="text-2xl font-bold text-white">Leadr</a>
 
-      <!-- Hamburger Toggle (Mobile) -->
-      <button id="nav-toggle" class="text-white md:hidden focus:outline-none">
-        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-          <path fill-rule="evenodd" d="M4 5h16M4 12h16M4 19h16" clip-rule="evenodd" />
-        </svg>
-      </button>
-
-      <!-- Navigation Links -->
-      <div id="nav-menu"
-        class="hidden md:flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 mt-4 md:mt-0">
-        <a href="#fitur" class="text-white hover:underline">Fitur</a>
-        <a href="#cara-kerja" class="text-white hover:underline">Cara Kerja</a>
-        <a href="{{ route('register') }}"
+      <div class="md:flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
+        <a href="#fitur" class="hidden sm:inline text-white hover:underline">Fitur</a>
+        <a href="#cara-kerja" class="hidden sm:inline text-white hover:underline">Cara Kerja</a>
+        <a href="{{ route('login') }}"
           class="px-4 py-2 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 text-center">
-          Mulai Sekarang
+          Login
         </a>
       </div>
+
     </div>
   </nav>
 
